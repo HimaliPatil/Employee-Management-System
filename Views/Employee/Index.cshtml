@@ -1,0 +1,90 @@
+﻿@model IEnumerable<EmployeeManagement.Models.ClassesEmp.Employee>
+@using Kendo.Mvc.UI;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSneha.cshtml";
+}
+<script type="text/javascript">
+    $(Document).ready(function () {
+        var url = '@Url.Action("GetAllEmpsDetails", "Employee")';
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            traditional: true,
+            success: function (result) {
+                if (result) {
+                    if (result.isSuccess) {
+                        console.log(result.data);
+
+                        $("#grid").data("kendoGrid").dataSource.data(result.data);
+                    }
+                    else {
+
+                    }
+                }
+            }
+        });
+        //$('#btnAdd').cl
+        //    //$('#Employeemodal').modal('show');
+
+
+        //});
+    });
+
+
+</script>
+<body>
+
+    @(Html.Kendo().Grid<EmployeeManagement.Models.ClassesEmp.Employee>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(model => model.Id).Filterable(false).Hidden();
+        columns.Bound(model => model.Name);
+        columns.Bound(model => model.DesgnationId);
+        columns.Bound(model => model.Gender);
+        columns.Bound(model => model.DepartmentId);
+        columns.Bound(model => model.Experience);
+        columns.Bound(model => model.Skills);
+        columns.Bound(model => model.EmailId);
+        columns.Bound(model => model.ContactNo);
+        columns.Bound(model => model.SupervisorId);
+        columns.Bound(model => model.DateOfBirth).Format("{0: yyyy/MM/dd HH.mm.ss}"); ;
+        columns.Bound(model => model.Address);
+        columns.Bound(model => model.InsertedBy);
+        columns.Bound(model => model.InsertedOn);
+        columns.Bound(model => model.UpdatedBy);
+        columns.Bound(model => model.UpdatedOn);
+    })
+    .Sortable()
+    .Pageable()
+    .Scrollable()
+    .HtmlAttributes(new { style = "height:550px;" })
+    //.ToolBar(toolbar => toolbar.Custom(
+
+    //    ))
+    .DataSource(source => source
+    .Ajax()
+    .PageSize(10)
+    )
+
+    )
+
+    <script type="text/javascript">
+            function error_handler(e) {
+                if (e.errors) {
+                    var message = "Errors:\n";
+                    $.each(e.errors, function (key, value) {
+                        if ('errors' in value) {
+                            $.each(value.errors, function () {
+                                message += this + "\n";
+                            });
+                        }
+                    });
+                    alert(message);
+                }
+            }
+    </script>
+</body>
+

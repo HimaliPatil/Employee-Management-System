@@ -1,0 +1,105 @@
+﻿@*@model IEnumerable<EmployeeManagement.Models.ClassesEmp.Employee>
+@model IEnumerable<EmployeeManagement.Models.ClassesEmp.EmpModelList>
+@model IEnumerable<EmployeeManagement.Models.ClassesEmp.LookupData>*@
+
+@using Kendo.Mvc.UI
+@model EmployeeManagement.Models.ClassesEmp.EmpModelList
+
+
+@{
+    ViewBag.Title = "OnPageLoad";
+    Layout = "~/Views/Shared/_LayoutSneha.cshtml";
+}
+<link rel="stylesheet" href="~/Content/kendo/kendo.common.min.css">
+<link rel="stylesheet" href="~/Content/kendo/kendo.default.min.css">
+<script src="~/Scripts/kendo/kendo.all.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function()
+    {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetAllEmpsDetails", "Employee")',
+                dataType: "json",
+                traditional: true,
+                success: function (result) {
+                    if (result) {
+                        if (result.isSuccess) {
+                           // console.log(result.data);
+                            $("#grid").data("kendoGrid").dataSource.data(result.data);
+                        }
+                        else {
+
+                        }
+                    }
+                }
+            });
+
+    });
+
+
+    function AddEmployee()
+    {
+        var wnd = $("#popUpwindow").data("kendoWindow");
+        wnd.open();
+        wnd.center();
+    }
+</script>
+
+<body>
+    
+   
+    @(Html.Kendo().Grid<EmployeeManagement.Models.ClassesEmp.Employee>()
+            .Name("grid")
+            .Columns(col =>
+            {
+            col.Template(@<text></text>).ClientTemplate("<button class='fas fa-plus-square'/>");
+            col.Template(@<text></text>).ClientTemplate("<button class='fas fa-edit'/>");
+
+                col.Bound(model => model.Id);
+                col.Bound(model => model.Name);
+                // col.Bound(model => model.DesgnationId);
+                col.Bound(model => model.Designation);
+                //col.Bound(model => model.DepartmentId);
+                col.Bound(model => model.Department);
+                col.Bound(model => model.Gender);
+                col.Bound(model => model.Experience);
+                col.Bound(model => model.Skills);
+                col.Bound(model => model.EmailId);
+                col.Bound(model => model.ContactNo);
+                // col.Bound(model => model.SupervisorId);
+                col.Bound(model => model.Supervisor);
+                col.Bound(model => model.DateOfBirth).ClientTemplate("#= kendo.toString(kendo.parseDate(DateOfBirth), 'dd/MM/yyyy') #");
+                col.Bound(model => model.Address);
+                col.Bound(model => model.InsertedBy);
+                col.Bound(model => model.InsertedOn).ClientTemplate("#= kendo.toString(kendo.parseDate(InsertedOn), 'dd/MM/yyyy') #"); 
+                col.Bound(model => model.UpdatedBy);
+                col.Bound(model => model.UpdatedOn).ClientTemplate("#= kendo.toString(kendo.parseDate(UpdatedOn), 'dd/MM/yyyy') #");
+            })
+            .ToolBar(toolBar => toolBar.Template("<a class='k-button k-button-icontext' onclick='AddEmployee()' href='#'><i class='fas fa-plus'></i> Add Employee</a>"))
+            .Sortable()
+            .Pageable()
+            .AutoBind(false)
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:550px;" })
+            .DataSource(source => source
+            .Ajax()
+            .PageSize(10))
+            )
+  
+    
+      @(Html.Kendo().Window()
+    .Name("popUpwindow")
+    .Content(@Html.Partial("_Add",Model).ToHtmlString())
+    .Draggable()
+    .Visible(false)
+    .Width(500)
+     .Actions(actions => actions.Pin().Minimize().Maximize().Close())
+    .Resizable()
+    .Title("Add Employee")
+  
+    )
+
+</body>
+

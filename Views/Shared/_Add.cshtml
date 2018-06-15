@@ -1,0 +1,183 @@
+﻿@using Kendo.Mvc.UI
+@model EmployeeManagement.Models.ClassesEmp.EmpModelList
+
+ @*@model List<EmployeeManagement.Models.ClassesEmp.LookupData>*@
+
+
+
+    <link rel="stylesheet" href="~/Content/kendo/kendo.common.min.css">
+    <link rel="stylesheet" href="~/Content/kendo/kendo.default.min.css">
+    <script src="~/Scripts/kendo/kendo.all.min.js"></script>
+
+    <body>
+        <form id="addForm" action="~/Employee/Create" method="post">
+
+            <div>
+
+                <label for="name">Name : </label>
+                @(Html.Kendo().TextBoxFor(model => model.Emp.Name)
+                    .Value(Model.Emp.Name)
+                        // .Name("nametxt")                 
+                 )
+            </div>
+            <br />
+            <div>
+                <label for="designationId">Designation : </label>
+
+              
+
+                @(Html.Kendo().DropDownListFor(model => model.Emp.DesgnationId)
+          //  .Name("desgDropdown")
+            .DataTextField("Name")
+            .DataValueField("Id")
+            .OptionLabel("Select...")
+            .BindTo(Model.DesnList)
+            .HtmlAttributes(new { style = "width: 100%" })
+
+                )
+             
+            </div>
+      
+            <br />
+            <div>
+             
+                <label for="departmentId">Department : </label>
+                @(Html.Kendo().DropDownListFor(model => model.Emp.DepartmentId)
+                        // .Name("deptDropdown")
+                         .HtmlAttributes(new { style = "130px" })
+                         .DataTextField("Name")
+                         .DataValueField("Id")
+                         .Text("Select Department")
+                         .BindTo(Model.DeptList)
+                         .OptionLabel("select department")
+
+                )
+            </div>
+          
+            <br />
+            <div>
+
+                <label for="supervisorId"> Supervisor : </label>
+                @(Html.Kendo().DropDownListFor(model => model.Emp.SupervisorId)
+                        // .Name("supervisorDropdown")
+                         .HtmlAttributes(new { style = "130px" })
+                         .DataTextField("Supervisor")
+                         .DataValueField("Id")
+                         .Text("Select super")
+                         .BindTo(Model.SupervisorList)
+                         .OptionLabel("select supervisor")
+
+                )
+            </div>
+           
+            <br />
+            <div>
+                <label for="gender">Gender : </label>
+                <div>
+                    <span></span>
+                    @(Html.Kendo().RadioButtonFor(model => model.Emp.Gender)
+                // .Name("gendertxt")
+                 .Label("F")
+                 .Checked(true)
+                 .HtmlAttributes(new { @name = "gender" })
+
+
+                    )
+                    @(Html.Kendo().RadioButtonFor(model => model.Emp.Gender)
+                      // .Name("gendertxt2")
+                       .Label("M")
+                       .HtmlAttributes(new { @name = "gender" })
+
+                    )
+                </div>
+
+            </div>
+            <br />
+            <div>
+                <label for="dob"> Date Of Birth : </label>
+                @(Html.Kendo().DatePickerFor(model => model.Emp.DateOfBirth)
+                  // .Name("dobtxt")
+                   .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+                 //.BindTo()
+
+                )
+            </div>
+            <br />
+            <div>
+                <label for="skills">Skills : </label>
+                <input type="button" id="AddSkill" value="Add ">
+                <br /><br />
+                <div id="skillmain">
+                    <div>
+                        @(Html.Kendo().TextBoxFor(model => model.Emp.Skills)
+                   //.Name("dobtxt")
+                   .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+                //.BindTo()
+
+                        )
+                    </div>
+                </div>
+
+                <br />
+            </div>
+            <script>
+                var phonesDiv = $('#skillmain');
+                $('#AddSkill').click(function () {
+                    var skillNew = $('div:eq(0)', phonesDiv).clone();     //1st div
+                    $('input', skillNew).val('');
+                    phonesDiv.append('<br /><div style="clear:both;" />')
+                     .append(skillNew)
+                });
+            </script>
+            <div>
+                <label>Experience : </label>
+                @(Html.Kendo().NumericTextBoxFor(model => model.Emp.Experience)
+                    //.Name("exptxt")
+                )
+            </div>
+            <br />
+            <div>
+                <label for="emailId">Email Id :</label>
+                @(Html.Kendo().TextBoxFor(model => model.Emp.EmailId)
+                    //.Name("EmailIdtxt")
+                )
+            </div>
+            <br />
+            <div>
+                <label for="address">Address : </label>
+                @(Html.Kendo().TextBoxFor(model => model.Emp.Address)
+                    //.Name("adressdtxt")
+                )
+            </div>
+            <br />
+
+            <div>
+                <label for="contactNo">Contact No: </label>
+                @(Html.Kendo().MaskedTextBoxFor(model => model.Emp.ContactNo)
+                  //.Name("phone_number")
+                  .Mask("(+90) 000-000-0000")
+            //.Value("90 123 4567")
+                )
+
+
+            </div>
+            <br />
+            <div>
+                <label for="insertedBy"> Inserted By : </label>
+                @(Html.Kendo().TextBoxFor(model => model.Emp.InsertedBy)
+                    //.Name("insertedbytxt")
+                )
+            </div>
+            <br />
+            <div>
+                @(Html.Kendo().Button()
+              .Name("textButton")
+              .HtmlAttributes(new { Type="Submit" })
+              .Content("Add")
+
+                )
+            </div>
+        </form>
+
+
+    </body>

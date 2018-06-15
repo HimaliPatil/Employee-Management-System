@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+    <link href="~/Content/kendo/kendo.common-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/kendo/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/kendo/kendo.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/Content/CSS/fontawesome-all.min.css" /> 
+    <script src="~/Scripts/kendo/jquery.min.js"></script>
+    <script src="~/Scripts/kendo/kendo.all.min.js"></script> 
+    <script src="~/Scripts/kendo/angular.min.js"></script>
+    <script src="~/Scripts/kendo/jszip.min.js"></script>
+   
+   <script src="~/Scripts/kendo/kendo.aspnetmvc.min.js"></script>
+    <title>@ViewBag.Title </title>
+   
+</head>
+<body>
+    <header style="background-color:deepskyblue;text-align:center;line-height:5">
+       <h2> Employee Management </h2>
+    </header>
+    <nav style="background-color:burlywood ;text-align:right;line-height:3">
+   
+      @*@Html.ActionLink("Update", "AddEmps", "Employee")
+      @Html.ActionLink("Get All", "GetAllEmps", "Employee")
+      @Html.ActionLink("Delete", "DeleteEmp", "Employee")*@
+      </nav>
+   
+    <div>
+        @RenderBody()
+
+        </div>
+</body>
+</html>

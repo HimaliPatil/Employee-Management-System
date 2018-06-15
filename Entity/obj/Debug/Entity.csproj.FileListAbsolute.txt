@@ -1,0 +1,11 @@
+D:\IN-SBIDKAR\C# Practice\EmpMangementSys\Entity\bin\Debug\Entity.dll
+D:\IN-SBIDKAR\C# Practice\EmpMangementSys\Entity\bin\Debug\Entity.pdb
+D:\IN-SBIDKAR\C# Practice\EmpMangementSys\Entity\obj\Debug\Entity.dll
+D:\IN-SBIDKAR\C# Practice\EmpMangementSys\Entity\obj\Debug\Entity.pdb
+D:\IN-SBIDKAR\C# Practice\EmpMangementSys\Entity\obj\Debug\Entity.csprojResolveAssemblyReference.cache
+F:\pd\EmpMangementSys\Entity\bin\Debug\Entity.dll
+F:\pd\EmpMangementSys\Entity\bin\Debug\Entity.pdb
+F:\pd\EmpMangementSys\Entity\obj\Debug\Entity.csprojResolveAssemblyReference.cache
+F:\pd\EmpMangementSys\Entity\obj\Debug\Entity.csproj.CoreCompileInputs.cache
+F:\pd\EmpMangementSys\Entity\obj\Debug\Entity.dll
+F:\pd\EmpMangementSys\Entity\obj\Debug\Entity.pdb
